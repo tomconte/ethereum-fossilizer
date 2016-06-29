@@ -1,0 +1,19 @@
+{
+  "name": "ethereum-fossilizer",
+  "version": "1.0.0",
+  "description": "This little tool watches a directory and \"fossilizes\" the files by storing their hash on an Ethereum blockchain using a smart contract.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ethereum"
+  ],
+  "author": "Thomas Conte",
+  "license": "ISC",
+  "dependencies": {
+    "bignumber.js": "^2.3.0",
+    "chokidar": "^1.6.0",
+    "web3": "^0.17.0-alpha"
+  }
+}
