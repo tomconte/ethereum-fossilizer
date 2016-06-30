@@ -25,7 +25,7 @@ function fossilize(path, hash) {
 ** Launch watcher
 */
 
-chokidar.watch('.', {ignoreInitial: true}).on('all', function(event, path) {
+chokidar.watch('./root', {ignoreInitial: true}).on('all', function(event, path) {
   if (event != 'add') return;
   fs.readFile(path, function (err, data) {
     var hash = crypto.createHash('sha256').update(data).digest('hex');

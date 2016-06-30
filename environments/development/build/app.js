@@ -5808,6 +5808,11 @@ function setStatus(message) {
   status.innerHTML = message;
 };
 
+function addLog(message) {
+  var status = document.getElementById("log");
+  status.innerHTML += message;
+};
+
 function refreshAccount() {
   var fossilizer = Fossilizer.deployed();
 
@@ -5866,6 +5871,23 @@ window.onload = function() {
     account = accounts[0];
 
     refreshAccount();
+
+    // Setup logs
+    var fossilizer = Fossilizer.deployed();
+    var emailEvent = fossilizer.EmailFossilized({}, {fromBlock: 'latest'});
+    var docEvent = fossilizer.DocumentFossilized({}, {fromBlock: 'latest'});
+
+    emailEvent.watch(function(error, log) {
+      if (error) return;
+      var message = "New e-mail: <b>" + log.args.subject + "</b><br>";
+      addLog(message);
+    });
+
+    docEvent.watch(function(error, log) {
+      if (error) return;
+      var message = "New document: <b>" + log.args.path + "</b><br>";
+      addLog(message);
+    });
   });
 }
 

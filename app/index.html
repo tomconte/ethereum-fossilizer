@@ -11,14 +11,18 @@
   <h2>Secure document tracking</h2>
   <h3>You have <span class="black"><span id="nbdocs"></span></span> documents hashed</h3>
 
-  <br>
-  <h1>Check Hash</h1>
-  <br>
-    <label for="hash">Hash:</label>
-    <input type="text" id="hash" placeholder="e.g., 0xc8495518f9d83c36f90dfc9542cae8d33547382abac13d681c9058e75b487cd8"></input>
-  <br><br>
-    <button id="check" onclick="checkHash()">Check</button>
-  <br><br>
-  <span id="status"></span>
+  <p>
+    <h1>Check Hash</h1>
+    <p><label for="hash">Hash:</label></p>
+    <p><input type="text" id="hash" placeholder="e.g., 0xc8495518f9d83c36f90dfc9542cae8d33547382abac13d681c9058e75b487cd8"></input></p>
+    <p><button id="check" onclick="checkHash()">Check</button></p>
+  </p>
+  <p>
+    <span id="status"></span>
+  </p>
+  <p>
+    <h2>Transaction log</h2>
+    <div id="log"></div>
+  </p>
 </body>
 </html>
