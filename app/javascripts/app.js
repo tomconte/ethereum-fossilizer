@@ -16,43 +16,36 @@ function refreshAccount() {
   nbdocs_element.innerHTML = n;
 };
 
-function checkDocument() {
+function checkHash() {
   var fossilizer = Fossilizer.deployed();
 
   var hash = document.getElementById("hash").value;
 
   setStatus("Initiating transaction... (please wait)");
 
+  // First, check for a document
   fossilizer.documents.call(hash, {from: account}).then(function(result) {
     console.log(result);
     if (result[0] != '0x0000000000000000000000000000000000000000')
-      setStatus("Document found! Name: <b>" + result[1] + "</b> from computer: " + result[2]);
-    else
-      setStatus("Document not found!");
+      setStatus("<b>Document</b> found!<br>Name: <b>" + result[1] + "</b> from computer: " + result[2]);
+    else {
+      // If no document was found, check for an e-mail
+      fossilizer.emails.call(hash, {from: account}).then(function(result) {
+        console.log(result);
+        if (result[0] != '0x0000000000000000000000000000000000000000')
+          setStatus("<b>Email</b> found!<br>Subject: <b>" + result[1] + "</b> from: " + result[2] + " to: " + result[3]);
+        else
+          setStatus("No Document or Email found for that hash!");
+        refreshAccount();
+      }).catch(function(e) {
+        console.log(e);
+        setStatus("Error calling function; see log.");
+      });
+    }
     refreshAccount();
   }).catch(function(e) {
     console.log(e);
-    setStatus("Error calling function; see log.");
-  });
-};
-
-function checkEmail() {
-  var fossilizer = Fossilizer.deployed();
-
-  var hash = document.getElementById("hash").value;
-
-  setStatus("Initiating transaction... (please wait)");
-
-  fossilizer.emails.call(hash, {from: account}).then(function(result) {
-    console.log(result);
-    if (result[0] != '0x0000000000000000000000000000000000000000')
-      setStatus("Email found! Subject: <b>" + result[1] + "</b> from: " + result[2] + " to: " + result[3]);
-    else
-      setStatus("Email not found!");
-    refreshAccount();
-  }).catch(function(e) {
-    console.log(e);
-    setStatus("Error calling function; see log.");
+    setStatus("Error calling documents function; see log.");
   });
 };
 
