@@ -5879,13 +5879,15 @@ window.onload = function() {
 
     emailEvent.watch(function(error, log) {
       if (error) return;
-      var message = "New e-mail: <b>" + log.args.subject + "</b><br>";
+      var dateStr = new Date(log.args.timestamp);
+      var message = "New e-mail: <b>" + log.args.subject + "</b> from " + log.args.emailFrom + " to " + log.args.emailTo + "<br>";
       addLog(message);
     });
 
     docEvent.watch(function(error, log) {
       if (error) return;
-      var message = "New document: <b>" + log.args.path + "</b><br>";
+      var dateStr = new Date(log.args.timestamp);
+      var message = "New document: <b>" + log.args.path + "</b> on " + log.args.computer + "<br>";
       addLog(message);
     });
   });
