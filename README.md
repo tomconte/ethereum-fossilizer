@@ -8,7 +8,11 @@ This project consists of a DApp, written using the [Truffle](https://truffle.rea
 
 I recommend using a private blockchain for development and testing so that you don't have to pay actual Ether. You could also use [EthereumJS TestRPC](https://github.com/ethereumjs/testrpc) as recommended in the Truffle documentation. 
 
+You can follow our [Ethereum "Blockchain as a service" on Azure tutorial](https://github.com/Azure/azure-blockchain-projects/tree/master/baas-artifacts/linux-go-ethereum) to quickly create a Linux VM running a private node.
+
 ## Running the application
+
+You will need to install the [Truffle](https://github.com/ConsenSys/truffle) tool. Follow the [official Truffle documentation](http://truffle.readthedocs.io/en/latest/) for installation instructions (hint: it requires Node.JS).
 
 - Compile and deploy the contract
 
