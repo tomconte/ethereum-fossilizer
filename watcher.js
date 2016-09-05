@@ -1,4 +1,5 @@
-var crypto = require('crypto'), fs = require('fs');
+var fs = require('fs');
+var crypto = require('crypto');
 var chokidar = require('chokidar');
 var Web3 = require('web3');
 var BigNumber = require('bignumber.js');
@@ -25,10 +26,12 @@ function fossilize(path, hash) {
 ** Launch watcher
 */
 
-chokidar.watch('./root', {ignoreInitial: true}).on('all', function(event, path) {
-  if (event != 'add') return;
-  fs.readFile(path, function (err, data) {
-    var hash = crypto.createHash('sha256').update(data).digest('hex');
-    fossilize(path, hash);
+module.exports = function(callback) {
+  chokidar.watch('./root', {ignoreInitial: true}).on('all', function(event, path) {
+    if (event != 'add') return;
+    fs.readFile(path, function (err, data) {
+      var hash = crypto.createHash('sha256').update(data).digest('hex');
+      fossilize(path, hash);
+    });
   });
-});
+}
